@@ -1,0 +1,46 @@
+# main-flow.yaml
+# 声明式 Android App 主流程验证
+#
+# 运行方式: npx midscene ./src/main-flow.yaml
+# 或:       npm run test:yaml
+#
+# FIXME: 将占位值替换为你的实际 App 信息
+
+android:
+  launch: com.example.yourapp           # FIXME: 你的 App 包名（网页用 URL）
+  # deviceId: emulator-5554             # FIXME: 可选，指定设备 ID
+  autoDismissKeyboard: false            # 防止键盘副作用影响 WebView/H5
+
+tasks:
+  - name: 启动并等待
+    flow:
+      - sleep: 5000
+
+  - name: 登录
+    flow:
+      - aiAct: 在首页找到登录按钮并点击
+      - aiAct: 在用户名输入框中输入 "testuser"，在密码输入框中输入 "password123"，然后点击登录按钮
+      - sleep: 3000
+
+  - name: 验证登录成功
+    flow:
+      - aiAssert: 登录成功后应显示主页或仪表盘，登录表单不再可见
+
+  - name: 导航到功能页面
+    flow:
+      - aiAct: 在屏幕上找到主要功能入口并点击
+      - sleep: 3000
+
+  - name: 与功能交互
+    flow:
+      - aiAct: 在当前页面执行主要操作，例如填写表单或点击按钮
+      - sleep: 3000
+
+  - name: 验证操作结果
+    flow:
+      - aiAssert: 操作完成后应有可见的反馈，例如成功提示或更新的内容
+
+  - name: 提取页面信息
+    flow:
+      - aiQuery: "{pageTitle: string, hasSuccessMessage: boolean}, 提取页面标题和是否有成功提示"
+        name: result

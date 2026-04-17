@@ -1,0 +1,15 @@
+{
+  "name": "test-app-automation",
+  "version": "1.0.0",
+  "description": "Midscene.js Android app automation -- main flow verification",
+  "type": "module",
+  "scripts": {
+    "test:js": "node src/main-flow.js",
+    "test:yaml": "midscene ./src/main-flow.yaml"
+  },
+  "devDependencies": {
+    "@midscene/android": "latest",
+    "@midscene/cli": "latest",
+    "dotenv": "^16.4.5"
+  }
+}
